@@ -1,5 +1,5 @@
 /* ==========================================================================
-   PLOT 19 NEOPOLIS BY NEXHOUZ - SENIOR UI/UX INTERACTION CONTROLLER
+   NEOPOLIS - SENIOR UI/UX INTERACTION CONTROLLER
    ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -103,10 +103,10 @@ document.addEventListener('DOMContentLoaded', () => {
   
   if (btnZoomMasterplan && masterplanImg) {
     btnZoomMasterplan.addEventListener('click', () => {
-      openLightbox(masterplanImg.src, 'Plot 19 Neopolis — Architectural Master Site Plan Board');
+      openLightbox(masterplanImg.src, 'Neopolis — Architectural Master Site Plan Board');
     });
     masterplanImg.parentElement?.addEventListener('click', () => {
-      openLightbox(masterplanImg.src, 'Plot 19 Neopolis — Architectural Master Site Plan Board');
+      openLightbox(masterplanImg.src, 'Neopolis — Architectural Master Site Plan Board');
     });
   }
 
@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
   document.querySelectorAll('.gallery-item').forEach(item => {
     item.addEventListener('click', () => {
       const img = item.querySelector('img');
-      const caption = item.querySelector('.gallery-caption')?.childNodes[0]?.textContent?.trim() || 'Plot 19 Neopolis Render';
+      const caption = item.querySelector('.gallery-caption')?.childNodes[0]?.textContent?.trim() || 'Neopolis Render';
       if (img) openLightbox(img.src, caption);
     });
   });
@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (btn) btn.textContent = 'Registering Private Request...';
     
     setTimeout(() => {
-      alert('Thank you for registering your interest in Plot 19 Neopolis. Our executive concierge will contact you directly.');
+      alert('Thank you for registering your interest in Neopolis. Our executive concierge will contact you directly.');
       contactForm.reset();
       if (btn) btn.textContent = 'Request Private Consultation';
     }, 1200);

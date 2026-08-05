@@ -1,188 +1,159 @@
 /* ==========================================================================
-   PLOT 19 NEOPOLIS BY NEXHOUZ - SANDSTONE & BRONZE RESPONSIVE STYLES
+   NEOPOLIS — RESPONSIVE STYLES
    ========================================================================== */
 
-@media (max-width: 1200px) {
-  .container {
-    padding: 0 2rem;
-  }
+/* ── TABLET (≤ 1024px) ────────────────────────────────────────────────── */
+@media (max-width: 1024px) {
 
-  .philosophy-grid {
-    gap: 3.5rem;
-  }
+  .container { padding: 0 2rem; }
 
-  .amenities-wrapper {
-    gap: 3.5rem;
-  }
-
-  .gallery-item-1 { height: 400px; }
-  .gallery-item-2 { height: 400px; }
-  .gallery-item-3 { height: 320px; }
-  .gallery-item-4 { height: 320px; }
-}
-
-@media (max-width: 992px) {
-  .site-nav {
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 320px;
-    height: 100vh;
-    background: var(--bg-sandstone-100);
-    border-left: 1px solid var(--bronze-border);
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 3rem 2.5rem;
-    gap: 1.75rem;
-    transform: translateX(100%);
-    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    z-index: 1001;
-    backdrop-filter: blur(25px);
-    box-shadow: -10px 0 30px rgba(0,0,0,0.1);
-  }
-
-  .site-nav .nav-link {
-    color: var(--text-charcoal-900) !important;
-  }
-
-  .site-nav.active {
-    transform: translateX(0);
-  }
-
-  .nav-toggle {
-    display: block;
-  }
-
-  .stats-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 3rem;
-  }
-
-  .stat-item:nth-child(2)::after {
-    display: none;
-  }
-
-  .philosophy-grid {
-    grid-template-columns: 1fr;
-    gap: 3.5rem;
-  }
-
-  .highlights-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .amenities-wrapper {
-    grid-template-columns: 1fr;
-    gap: 4rem;
-  }
-
-  .floorplan-grid {
-    grid-template-columns: 1fr;
-  }
-
+  .philosophy-grid,
+  .amenities-wrapper,
   .location-grid {
     grid-template-columns: 1fr;
     gap: 3.5rem;
   }
 
-  .footer-top {
-    grid-template-columns: 1fr 1fr;
-    gap: 3rem;
-  }
-}
+  .philosophy-content { padding-right: 0; }
 
-@media (max-width: 768px) {
-  .section-dark-espresso, .section-sandstone, .amenities-section, .masterplan-section, .floorplans-section, .gallery-section, .location-section, .contact-section {
-    padding: 5.5rem 0;
-  }
+  .philosophy-img-frame img { height: 420px; }
 
-  .hero-eyebrow {
-    font-size: 0.65rem;
-    letter-spacing: 0.25em;
-  }
-
-  .hero-title {
-    font-size: 2.6rem;
-  }
-
-  .hero-subtitle {
-    font-size: 0.95rem;
-  }
-
-  .hero-actions {
-    flex-direction: column;
-    width: 100%;
-    max-width: 320px;
-    margin: 0 auto;
-  }
-
-  .btn-bronze, .btn-outline-bronze {
-    width: 100%;
-  }
-
-  .stats-grid {
-    grid-template-columns: 1fr;
-    gap: 2.5rem;
-  }
-
-  .stat-item::after {
-    display: none !important;
-  }
+  .amenities-media-tag { right: 0; }
 
   .highlights-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2,1fr);
   }
 
-  .gallery-grid {
-    grid-template-columns: 1fr;
-  }
+  .highlight-block:nth-child(2n) { border-right: none; }
+  .highlight-block:nth-child(n+5) { border-bottom: none; }
+  .highlight-block:nth-child(5) { border-bottom: 1px solid rgba(26,60,68,0.10); }
 
-  .gallery-item {
-    grid-column: span 12 !important;
-    height: 300px !important;
-  }
-
-  .amenities-list {
-    grid-template-columns: 1fr;
-  }
-
-  .location-cards {
-    grid-template-columns: 1fr;
-  }
-
-  .contact-card-glass {
-    padding: 2.5rem 1.5rem;
-  }
-
-  .form-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .form-group-full {
-    grid-column: span 1;
-  }
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 2.5rem; }
+  .stat-item:nth-child(2n)::after { display: none; }
+  .stat-item:nth-child(odd)::after { display: block; }
 
   .footer-top {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 2.5rem;
   }
 
-  .footer-bottom {
-    flex-direction: column;
-    gap: 1rem;
-    text-align: center;
-  }
+  .masterplan-overlay-bar { flex-direction: column; align-items: flex-start; }
+  .masterplan-info { gap: 2rem; }
 
-  .floating-action-bar {
-    bottom: 1.2rem;
-    right: 1.2rem;
-    gap: 0.6rem;
-  }
-
-  .float-action-btn {
-    padding: 0.65rem 1.1rem;
-    font-size: 0.72rem;
-  }
+  .floorplan-grid { gap: 1.5rem; }
 }
 
+
+/* ── MOBILE LARGE (≤ 768px) ───────────────────────────────────────────── */
+@media (max-width: 768px) {
+
+  :root { --section-pad: 5rem 0; }
+
+  .container { padding: 0 1.4rem; }
+
+  /* Nav */
+  .nav-toggle { display: flex; flex-direction: column; justify-content: space-between; }
+
+  .site-nav {
+    position: fixed;
+    top: 0; right: -100%;
+    width: 80%; max-width: 340px;
+    height: 100vh;
+    background: var(--bg-cream);
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 6rem 2rem 3rem;
+    border-left: 1px solid rgba(26,60,68,0.10);
+    box-shadow: var(--shadow-lg);
+    transition: right 0.4s cubic-bezier(0.16,1,0.3,1);
+    z-index: 1001;
+    overflow-y: auto;
+  }
+
+  .site-nav.active { right: 0; }
+
+  .nav-link {
+    width: 100%;
+    font-size: 0.85rem;
+    padding: 0.9rem 0;
+    border-bottom: 1px solid rgba(26,60,68,0.07);
+  }
+
+  .nav-cta { margin-top: 1.5rem; width: 100%; justify-content: center; }
+
+  /* Hero */
+  .hero-title { font-size: clamp(2.6rem,9vw,4.2rem); }
+  .hero-subtitle { font-size: 0.92rem; }
+  .hero-actions { flex-direction: column; gap: 1rem; }
+  .hero-actions .btn-outline-bronze { width: 100%; max-width: 320px; justify-content: center; }
+  .hero-watermark { font-size: clamp(5rem,18vw,12rem); }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 2rem; }
+  .stat-item::after { display: none; }
+
+  /* Philosophy */
+  .philosophy-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .philosophy-img-frame img { height: 340px; }
+  .philosophy-title { font-size: 2.2rem; }
+  .philosophy-person-card { left: 1rem; right: 1rem; min-width: auto; }
+
+  /* Highlights */
+  .highlights-grid { grid-template-columns: 1fr; }
+  .highlight-block { border-right: none !important; border-bottom: 1px solid rgba(26,60,68,0.10) !important; }
+  .highlight-block:last-child { border-bottom: none !important; }
+
+  /* Amenities */
+  .amenities-wrapper { grid-template-columns: 1fr; gap: 3rem; }
+  .amenities-media img { height: 320px; }
+  .amenities-media-tag { right: 0; bottom: 1rem; left: 1rem; right: 1rem; }
+
+  /* Masterplan */
+  .masterplan-info { flex-direction: column; gap: 1.2rem; }
+  .masterplan-img-container img { max-height: 300px; }
+
+  /* Floor Plans */
+  .floorplan-grid { grid-template-columns: 1fr; }
+  .floorplan-image-wrapper img { height: 260px; }
+  .floorplan-meta-items { flex-direction: column; gap: 0.5rem; }
+  .floorplan-header-bar { flex-direction: column; gap: 0.75rem; align-items: flex-start; }
+
+  /* Location */
+  .location-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .location-map-wrap { height: 340px; }
+
+  /* Contact */
+  .form-grid { grid-template-columns: 1fr; }
+  .contact-card-glass { padding: 2rem 1.5rem; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: 0.5rem; }
+
+  /* Floating Buttons */
+  .float-action-btn span { display: none; }
+  .float-action-btn { padding: 0.9rem; border-radius: 50%; width: 48px; height: 48px; justify-content: center; }
+  .floating-action-bar { bottom: 1.5rem; right: 1rem; gap: 0.6rem; }
+}
+
+
+/* ── MOBILE SMALL (≤ 480px) ───────────────────────────────────────────── */
+@media (max-width: 480px) {
+
+  .hero-title { font-size: clamp(2.2rem,8vw,3.2rem); }
+  .section-title { font-size: clamp(1.9rem,7vw,2.6rem); }
+
+  .stats-grid { grid-template-columns: 1fr 1fr; }
+
+  .floorplan-badge { font-size: 0.6rem; }
+}
+
+
+/* ── PREFERS REDUCED MOTION ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
