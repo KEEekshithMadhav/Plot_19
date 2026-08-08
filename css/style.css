@@ -463,6 +463,11 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
   line-height: 1.8;
 }
 
+.hero-subtitle-bright {
+  color: rgba(255,255,255,0.92);
+  text-shadow: 0 1px 6px rgba(0,0,0,0.3);
+}
+
 .hero-actions {
   display: flex;
   align-items: center;
@@ -690,16 +695,18 @@ button, input, textarea, select { font-family: inherit; font-size: inherit; }
 }
 
 .stat-number {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: clamp(3rem,5vw,4.5rem);
-  font-weight: 300;
+  font-weight: 600;
   color: var(--teal-800);
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 
 .stat-plus {
-  font-family: var(--font-serif);
+  font-family: var(--font-sans);
   font-size: 2rem;
+  font-weight: 600;
   color: var(--teal-600);
 }
 
