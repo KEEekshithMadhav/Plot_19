@@ -1,6 +1,23 @@
-/* ==========================================================================
-   NEOPOLIS - SENIOR UI/UX INTERACTION CONTROLLER
-   ========================================================================== */
+// Configuration: Paste your Google Apps Script Web App URL here
+const GOOGLE_SHEET_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxE8vcLXP-g7HcNpqNf8Wv7bd0F-VKYazImo8BDd79VAgIoo4RrzZfVFDmd1mjQCKvo/exec';
+
+// Helper function to send lead data to Google Sheet endpoint
+async function sendLeadToGoogleSheet(data) {
+  if (!GOOGLE_SHEET_SCRIPT_URL || GOOGLE_SHEET_SCRIPT_URL.includes('PUT_YOUR_SCRIPT_ID_HERE')) {
+    console.log('Google Sheets URL not configured yet. Payload:', data);
+    return;
+  }
+  try {
+    await fetch(GOOGLE_SHEET_SCRIPT_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.error('Error posting to Google Sheets:', err);
+  }
+}
 
 document.addEventListener('DOMContentLoaded', () => {
   // 1. Preloader Fade-out
@@ -78,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         statNumbers.forEach(stat => {
           const target = parseInt(stat.getAttribute('data-target') || '0', 10);
           if (isNaN(target) || target === 0) return;
-          
+
           let count = 0;
           const speed = Math.max(20, Math.floor(2000 / target));
           const timer = setInterval(() => {
@@ -100,7 +117,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // 6. Masterplan Board Zoom & Lightbox
   const btnZoomMasterplan = document.getElementById('btnZoomMasterplan');
   const masterplanImg = document.getElementById('masterplanImg');
-  
+
   if (btnZoomMasterplan && masterplanImg) {
     btnZoomMasterplan.addEventListener('click', () => {
       openLightbox(masterplanImg.src, 'Neopolis — Architectural Master Site Plan Board');
@@ -148,13 +165,14 @@ document.addEventListener('DOMContentLoaded', () => {
   const modalCloseBtns = document.querySelectorAll('.modal-close');
   const floorplanUnlockBtns = document.querySelectorAll('.btn-unlock-floorplan');
   const unlockForm = document.getElementById('unlockForm');
+  let currentPlanName = 'Tower Residence';
 
   floorplanUnlockBtns.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const planName = btn.getAttribute('data-plan') || 'Residence';
+      currentPlanName = btn.getAttribute('data-plan') || 'Tower Residence';
       const modalPlanTitle = document.getElementById('modalPlanTitle');
-      if (modalPlanTitle) modalPlanTitle.textContent = `Unlock ${planName} Layout`;
+      if (modalPlanTitle) modalPlanTitle.textContent = `Unlock ${currentPlanName} Layout`;
       unlockModal?.classList.add('active');
       document.body.style.overflow = 'hidden';
     });
@@ -174,15 +192,33 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  unlockForm?.addEventListener('submit', (e) => {
+  unlockForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const submitBtn = unlockForm.querySelector('button[type="submit"]');
+    const origText = submitBtn ? submitBtn.textContent : '';
     if (submitBtn) submitBtn.textContent = 'Unlocking Residence Layout...';
-    
+
+    const inputs = unlockForm.querySelectorAll('input');
+    const name = inputs[0]?.value || '';
+    const phone = inputs[1]?.value || '';
+    const email = inputs[2]?.value || '';
+
+    const payload = {
+      date: new Date().toLocaleString(),
+      sourceForm: 'Floor Plan Unlock Modal',
+      name: name,
+      phone: phone,
+      email: email,
+      residenceType: currentPlanName,
+      message: 'Unlocked HD Floor Plan schematic'
+    };
+
+    await sendLeadToGoogleSheet(payload);
+
     setTimeout(() => {
       unlockModal?.classList.remove('active');
       document.body.style.overflow = '';
-      
+
       // Unblur floor plan images gracefully
       document.querySelectorAll('.floorplan-image-wrapper img').forEach(img => {
         img.style.filter = 'none';
@@ -193,20 +229,41 @@ document.addEventListener('DOMContentLoaded', () => {
       });
 
       alert('Floor Plan unlocked successfully. High-definition architectural schematics are now viewable.');
-    }, 1200);
+      unlockForm.reset();
+      if (submitBtn) submitBtn.textContent = origText;
+    }, 800);
   });
 
   // 9. Contact Enquiry Form Submission
   const contactForm = document.getElementById('contactForm');
-  contactForm?.addEventListener('submit', (e) => {
+  contactForm?.addEventListener('submit', async (e) => {
     e.preventDefault();
     const btn = contactForm.querySelector('button[type="submit"]');
     if (btn) btn.textContent = 'Registering Private Request...';
-    
+
+    const fields = contactForm.querySelectorAll('.form-input');
+    const name = fields[0]?.value || '';
+    const phone = fields[1]?.value || '';
+    const email = fields[2]?.value || '';
+    const residenceType = fields[3]?.value || 'General Consultation';
+    const message = fields[4]?.value || '';
+
+    const payload = {
+      date: new Date().toLocaleString(),
+      sourceForm: 'Private Consultation Form',
+      name: name,
+      phone: phone,
+      email: email,
+      residenceType: residenceType,
+      message: message
+    };
+
+    await sendLeadToGoogleSheet(payload);
+
     setTimeout(() => {
       alert('Thank you for registering your interest in Neopolis. Our executive concierge will contact you directly.');
       contactForm.reset();
       if (btn) btn.textContent = 'Request Private Consultation';
-    }, 1200);
+    }, 800);
   });
 });
